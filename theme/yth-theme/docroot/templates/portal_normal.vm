@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name - $editFlag</title>
+
+	$theme.include($top_head_include)
+	
+
+</head>
+<body class="$css_class">
+
+$theme.include($body_top_include)
+
+#if ($is_signed_in && $editFlag && $editFlag == "1")
+	#dockbar()
+#end
+
+<div id="wrapper"> 
+#if(false)
+	<header id="banner" role="banner">
+		<div id="heading">
+			 <div class="top_lo">
+             	<div class="logo_top left">
+             	
+             	</div>
+         		<div class="Bar right">
+                    <div><a href="#" onclick="AddFavorite(window.location,document.title)" class="lan">加入收藏</a> | <a href="#" onclick="SetHome(this,window.location)" class="lan">设为首页</a> | <a href="/web/ws/contactus" class="lan">联系我们</a> | <a href="/c/portal/login" class="lan">用户登录</a></div>
+					
+            	</div>
+         	 </div>
+		</div>
+		#if ($has_navigation || $is_signed_in)
+			#parse ("$full_templates_path/navigation.vm")
+		#end
+	</header>
+#end
+	<div id="content">
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+
+	<footer  > 
+ 		<div class="footer_b">版权信息</div> 
+		<!-- #language('facebook') --> 		  
+	</footer>
+</div>
+
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>
